@@ -51,7 +51,7 @@ int _atoi(char *s)
 	int sign = 1, flag = 0, output = 0;
 	int i;
 
-	for (i=0; s[i] != '\0' && flag != 2; i++)
+	for (i = 0; s[i] != '\0' && flag != 2; i++)
 	{
 		if (s[i] == '-')
 			sign *= -1;

@@ -110,13 +110,13 @@ int read_history(info_t *info)
 		build_history_list(info, buf + last, line_count++);
 
 	free(buf);
-	info->hist_count = line_count;
+	info->histcount = line_count;
 
-	while (info->hist_count-- >= HIST_MAX)
+	while (info->histcount-- >= HIST_MAX)
 		delete_node_at_index(&(info->history), 0);
 
 	renumber_history(info);
-	return (info->hist_count);
+	return (info->histcount);
 }
 
 /**
@@ -157,5 +157,5 @@ int renumber_history(info_t *info)
 		node->num = i++;
 		node = node->next;
 	}
-	return (info->hist_count = i);
+	return (info->histcount = i);
 }

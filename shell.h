@@ -109,8 +109,6 @@ typedef struct builtin
 	char *type;
 	int (*func)(info_t *);
 } builtin_table;
-int change_directory(shell_info_t *shell_info);
-int display_help(shell_info_t *shell_info);
 
 
 /* toem_shloop.c */
@@ -175,10 +173,10 @@ int print_d(int input, int fd);
 void print_error(info_t *info, char *estr);
 int _erratoi(char *s);
 
-/* toem_inbuilt.c */
-int change_directory(shell_info_t *shell_info);
-int display_help(shell_info_t *shell_info);
-int exit_shell(shell_info_t *shell_info)
+/* toem_builtin.c */
+int _myhelp(info_t *info);
+ int _myexit(info_t *info);
+int _mycd(info_t *info);
 
 /* toem_builtin1.c */
 int _myhistory(info_t *info);

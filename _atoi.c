@@ -48,24 +48,20 @@ int _isalpha(int c)
  */
 int _atoi(char *s)
 {
-	int sign = 1, flag = 0, output = 0;
-	int i;
+int sign = 1, flag = 0, output = 0;
+int i;
 
-	for (i=0; s[i] != '\0' && flag != 2; i++)
-	{
-		if (s[i] == '-')
-			sign *= -1;
-
-		if (_isalpha(s[i]))
-			flag = 1;
-
-		if (s[i] >= '0' && s[i] <= '9')
-		{
-			flag = 1;
-			output = output * 10 + (s[i] - '0');
-		}
-		else if (flag == 1)
-			flag = 2;
+for (i=0; s[i] != '\0' && flag != 2; i++)
+{
+if (s[i] == '-')
+sign *= -1;if (_isalpha(s[i]))
+flag = 1;
+if (s[i] >= '0' && s[i] <= '9')
+{
+flag = 1;
+output = output * 10 + (s[i] - '0');	
+}
+else if (flag == 1)flag = 2;
 	}
 
 	return (sign * output);

@@ -174,9 +174,9 @@ void print_error(info_t *info, char *estr);
 int _erratoi(char *s);
 
 /* toem_builtin.c */
-int _myhelp(info_t *info);
- int _myexit(info_t *info);
-int _mycd(info_t *info);
+int custom_myhelp(info_t *custom_info);
+int custom_mycd(info_t *custom_info);
+int custom_exit(info_t *custom_info);
 
 /* toem_builtin1.c */
 int _myhistory(info_t *info);

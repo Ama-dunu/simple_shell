@@ -51,16 +51,7 @@ int _mysetenv(info_t *info)
 		return (0);
 	return (1);
 }
-{
-	if (info->argc != 3)
-	{
-		_eputs("Incorrect number of arguements\n");
-		return (1);
-	}
-	if (_setenv(info, info->argv[1], info->argv[2]))
-		return (0);
-	return (1);
-}
+
 /**
  * _myunsetenv - Removes an environment variable.
  * @info: Pointer to structure containing potential arguments.

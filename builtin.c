@@ -1,97 +1,99 @@
 #include "shell.h"
 
 /**
- * custom_exit - Exits the shell
- * @custom_info: Structure containing potential arguments. Used to maintain
- *               constant function prototype.
- * Return: Exits with a given exit status (0) if custom_info->argv[0] != "exit"
+ * _exit_shell - Exits the shell.
+ * @info: Structure containing potential arguments.
+ *
+ * Return: Exits with a given exit status (0) if info->argv[0] != "exit".
  */
-int custom_exit(info_t *custom_info)
+int _exit_shell(info_t *info)
 {
 	int exit_check;
 
-	if (custom_info->argv[1]) /* If there is an exit argument */
+	if (info->argv[1]) /* Check for exit argument */
 	{
-		exit_check = custom_erratoi(custom_info->argv[1]);
+		exit_check = _err_atoi(info->argv[1]);
 		if (exit_check == -1)
 		{
-			custom_info->status = 2;
-			print_error(custom_info, "Illegal number: ");
-			_custom_eputs(custom_info->argv[1]);
-			_custom_eputchar('\n');
+			info->status = 2;
+			print_error(info, "Illegal number: ");
+			_e_puts(info->argv[1]);
+			_e_putchar('\n');
 			return (1);
 		}
-		custom_info->err_num = custom_erratoi(custom_info->argv[1]);
+		info->err_num = _err_atoi(info->argv[1]);
 		return (-2);
 	}
-	custom_info->err_num = -1;
+	info->err_num = -1;
 	return (-2);
 }
 
 /**
- * custom_mycd - Changes the current directory of the process
- * @custom_info: Structure containing potential arguments. Used to maintain
- *               constant function prototype.
- * Return: Always 0
+ * _change_directory - Changes the current directory of the process.
+ * @info: Structure containing potential arguments.
+ *
+ * Return: Always 0.
  */
-int custom_mycd(info_t *custom_info)
+int _change_directory(info_t *info)
 {
-	char *custom_str, *custom_dir, custom_buffer[1024];
-	int custom_chdir_ret;
+	char *current_dir, *target_dir, buffer[1024];
+	int chdir_ret;
 
-	custom_str = getcwd(custom_buffer, 1024);
-	if (!custom_str)
+	current_dir = getcwd(buffer, 1024);
+	if (!current_dir)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
-	if (!custom_info->argv[1])
+
+	if (!info->argv[1])
 	{
-		custom_dir = custom_getenv(custom_info, "HOME=");
-		if (!custom_dir)
-			custom_chdir_ret =
-				chdir((custom_dir = custom_getenv(custom_info, "PWD=")) ? custom_dir : "/");
+		target_dir = _getenv(info, "HOME=");
+		if (!target_dir)
+			chdir_ret =
+				chdir((target_dir = _getenv(info, "PWD=")) ? target_dir : "/");
 		else
-			custom_chdir_ret = chdir(custom_dir);
+			chdir_ret = chdir(target_dir);
 	}
-	else if (_custom_strcmp(custom_info->argv[1], "-") == 0)
+	else if (_strcmp(info->argv[1], "-") == 0)
 	{
-		if (!custom_getenv(custom_info, "OLDPWD="))
+		if (!_getenv(info, "OLDPWD="))
 		{
-			_puts(custom_str);
+			_puts(current_dir);
 			_putchar('\n');
 			return (1);
 		}
-		_puts(custom_getenv(custom_info, "OLDPWD=")), _putchar('\n');
-		custom_chdir_ret =
-			chdir((custom_dir = custom_getenv(custom_info, "OLDPWD=")) ? custom_dir : "/");
+		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
+		chdir_ret =
+			chdir((target_dir = _getenv(info, "OLDPWD=")) ? target_dir : "/");
 	}
 	else
-		custom_chdir_ret = chdir(custom_info->argv[1]);
-	if (custom_chdir_ret == -1)
+		chdir_ret = chdir(info->argv[1]);
+
+	if (chdir_ret == -1)
 	{
-		print_error(custom_info, "can't cd to ");
-		_custom_eputs(custom_info->argv[1]), _custom_eputchar('\n');
+		print_error(info, "can't cd to ");
+		_e_puts(info->argv[1]), _e_putchar('\n');
 	}
 	else
 	{
-		_custom_setenv(custom_info, "OLDPWD", custom_getenv(custom_info, "PWD="));
-		_custom_setenv(custom_info, "PWD", getcwd(custom_buffer, 1024));
+		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
+		_setenv(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
 }
 
 /**
- * custom_myhelp - Displays help information (not yet implemented)
- * @custom_info: Structure containing potential arguments. Used to maintain
- *               constant function prototype.
- * Return: Always 0
+ * _show_help - Displays help information.
+ * @info: Structure containing potential arguments.
+ *
+ * Return: Always 0.
  */
-int custom_myhelp(info_t *custom_info)
+int _show_help(info_t *info)
 {
-	char **custom_arg_array;
+	char **arg_array;
 
-	custom_arg_array = custom_info->argv;
+	arg_array = info->argv;
 	_puts("help call works. Function not yet implemented \n");
 	if (0)
-		_puts(*custom_arg_array); /* Temp unused attribute workaround */
+		_puts(*arg_array); /* Temp attribute_unused workaround */
 	return (0);
 }
 

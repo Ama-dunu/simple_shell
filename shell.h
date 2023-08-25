@@ -57,10 +57,10 @@ typedef struct liststr
  * @argv:an array of strings generated from arg
  * @path: a string path for the current command
  * @argc: the argument count
- * @line_count: the error count
+ * @linecount: the error count
  * @err_num: the error code for exit()s
  * @linecount_flag: if on count this line of input
- * @fname: the program filename
+ * @filename: the program filename
  * @env: linked list local copy of environ
  * @environ: custom modified copy of environ from LL env
  * @history: the history node
@@ -174,9 +174,9 @@ void print_error(info_t *info, char *estr);
 int _erratoi(char *s);
 
 /* toem_builtin.c */
-int custom_myhelp(info_t *custom_info);
-int custom_mycd(info_t *custom_info);
-int custom_exit(info_t *custom_info);
+int _show_help(info_t *info);
+int _change_directory(info_t *info);
+int _exit_shell(info_t *info);
 
 /* toem_builtin1.c */
 int _myhistory(info_t *info);

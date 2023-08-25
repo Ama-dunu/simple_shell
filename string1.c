@@ -1,93 +1,94 @@
 #include "shell.h"
 
 /**
- * _str_copy - Copies a string.
- * @dest: The destination buffer.
- * @src: The source string.
- *
+ * _strcpy - Copies a string.
+ * @dest: The destination.
+ * @src: The source.
  * Return: Pointer to destination.
  */
-char *_str_copy(char *dest, char *src)
+char *_strcpy(char *dest, char *src)
 {
-    int i = 0;
+	int i = 0;
 
-    if (dest == src || src == NULL)
-        return dest;
+	if (dest == src || src == 0)
+		return (dest);
 
-    while (src[i])
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
-    return dest;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = 0;
+	return (dest);
 }
 
 /**
- * _str_duplicate - Duplicates a string.
+ * _strdup - Duplicates a string.
  * @str: The string to duplicate.
  *
  * Return: Pointer to the duplicated string.
  */
-char *_str_duplicate(const char *str)
+char *_strdup(const char *str)
 {
-    int length = 0;
-    char *result;
+	int length = 0;
+	char *ret;
 
-    if (str == NULL)
-        return NULL;
+	if (str == NULL)
+		return (NULL);
 
-    while (*str++)
-        length++;
+	while (*str++)
+		length++;
 
-    result = malloc(sizeof(char) * (length + 1));
-    if (!result)
-        return NULL;
+	ret = malloc(sizeof(char) * (length + 1));
+	if (!ret)
+		return (NULL);
 
-    for (length++; length--;)
-        result[length] = *--str;
-    return result;
+	for (length++; length--;)
+		ret[length] = *--str;
+
+	return (ret);
 }
 
 /**
- * _print_string - Prints a string.
+ * _puts - Prints a string to stdout.
  * @str: The string to be printed.
  *
- * Return: Nothing.
+ * Return: None.
  */
-void _print_string(char *str)
+void _puts(char *str)
 {
-    int i = 0;
+	int i = 0;
 
-    if (!str)
-        return;
+	if (!str)
+		return;
 
-    while (str[i] != '\0')
-    {
-        _putchar(str[i]);
-        i++;
-    }
+	while (str[i] != '\0')
+	{
+		_putchar(str[i]);
+		i++;
+	}
 }
 
 /**
- * _putchar - Writes a character to stdout.
- * @c: The character to print.
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
  *
- * Return: On success, 1.
+ * Return: On success, 1 is returned.
  * On error, -1 is returned, and errno is set appropriately.
  */
 int _putchar(char c)
 {
-    static int i;
-    static char buffer[WRITE_BUF_SIZE];
+	static int i;
+	static char buf[WRITE_BUF_SIZE];
 
-    if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
-    {
-        write(1, buffer, i);
-        i = 0;
-    }
-    if (c != BUF_FLUSH)
-        buffer[i++] = c;
-    return 1;
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	{
+		write(1, buf, i);
+		i = 0;
+	}
+	if (c != BUF_FLUSH)
+		buf[i++] = c;
+	return (1);
 }
+
 

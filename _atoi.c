@@ -1,91 +1,78 @@
 #include "shell.h"
 
 /**
- * custom_interactive - Determines if the shell is in interactive mode.
- * @custom_info: Pointer to custom struct containing shell information.
+ * interactive - Returns true if the shell is in interactive mode.
+ * @info: Pointer to a structure containing shell information.
  *
- * Return: 1 if interactive mode, 0 otherwise.
+ * Return: 1 if in interactive mode, 0 otherwise.
  */
-int custom_interactive(custom_info_t *custom_info)
+int interactive(info_t *info)
 {
-	return (isatty(STDIN_FILENO) && custom_info->custom_readfd <= 2);
+	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }
 
 /**
- * custom_is_delim - Checks if a character is a custom delimiter.
+ * is_delim - Checks if a character is a delimiter.
  * @ch: The character to check.
  * @delim_str: The delimiter string.
  *
- * Return: 1 if character is a delimiter, 0 otherwise.
+ * Return: 1 if true, 0 if false.
  */
-int custom_is_delim(char ch, char *delim_str)
+
+int is_delim(char ch, char *delim_str)
 {
 	while (*delim_str)
-	{
 		if (*delim_str++ == ch)
-		{
 			return (1);
-		}
-	}
 	return (0);
 }
 
 /**
- * custom_is_alpha - Checks if a character is alphabetic.
+ * _is_alpha - Checks if a character is an alphabetic character.
  * @ch: The character to check.
  *
  * Return: 1 if ch is alphabetic, 0 otherwise.
  */
-int custom_is_alpha(int ch)
+
+int _is_alpha(int ch)
 {
 	if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))
-	{
 		return (1);
-	}
 	else
-	{
 		return (0);
-	}
 }
 
 /**
- * custom_atoi - Converts a string to an integer.
+ * _atoi - Converts a string to an integer.
  * @str: The string to be converted.
  *
- * Return: 0 if no numbers in string, converted number otherwise.
+ * Return: 0 if no numbers in string, otherwise the converted number.
  */
-int custom_atoi(char *str)
-{
-	int i, custom_sign = 1, custom_flag = 0, output;
-	unsigned int custom_result = 0;
 
-	for (i = 0; str[i] != '\0' && custom_flag != 2; i++)
+int _atoi(char *str)
+{
+	int i, sign = 1, flag = 0, output;
+	unsigned int result = 0;
+
+	for (i = 0; str[i] != '\0' && flag != 2; i++)
 	{
 		if (str[i] == '-')
-		{
-			custom_sign *= -1;
-		}
+			sign *= -1;
 
 		if (str[i] >= '0' && str[i] <= '9')
 		{
-			custom_flag = 1;
-			custom_result *= 10;
-			custom_result += (str[i] - '0');
+			flag = 1;
+			result *= 10;
+			result += (s[i] - '0');
 		}
-		else if (custom_flag == 1)
-		{
-			custom_flag = 2;
-		}
+		else if (flag == 1)
+			flag = 2;
 	}
 
-	if (custom_sign == -1)
-	{
-		output = -custom_result;
-	}
+	if (sign == -1)
+		output = -result;
 	else
-	{
-		output = custom_result;
-	}
+		output = result;
 
 	return (output);
 }

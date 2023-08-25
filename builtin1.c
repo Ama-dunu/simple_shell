@@ -1,25 +1,28 @@
 #include "shell.h"
 
 /**
- * _myhistory - Displays the history list, one command per line, preceded
- *              with line numbers, starting at 0.
- * @info: Structure containing potential arguments.
+ * myhistory - Displays the history list, one command per line,
+ *             preceded by line numbers starting at 0.
+ * @info: Structure containing potential arguments. Used to maintain
+ *        consistent function prototype.
  *
  * Return: Always 0.
  */
-int _myhistory(info_t *info)
+
+int myhistory(info_t *info)
 {
 	print_list(info->history);
 	return (0);
 }
 
 /**
- * unset_alias - Unsets an alias.
- * @info: Parameter struct.
- * @str: The string alias.
+ * unset_alias - Sets an alias to a string.
+ * @info: Pointer to the parameter struct.
+ * @str: The string to set as an alias.
  *
  * Return: Always 0 on success, 1 on error.
  */
+
 int unset_alias(info_t *info, char *str)
 {
 	char *p, c;
@@ -37,12 +40,13 @@ int unset_alias(info_t *info, char *str)
 }
 
 /**
- * set_alias - Sets an alias to a string.
- * @info: Parameter struct.
- * @str: The string alias.
+ * set_alias - Assigns an alias to a string.
+ * @info: Pointer to the parameter struct.
+ * @str: The string to be used as an alias.
  *
  * Return: Always 0 on success, 1 on error.
  */
+
 int set_alias(info_t *info, char *str)
 {
 	char *p;
@@ -59,10 +63,11 @@ int set_alias(info_t *info, char *str)
 
 /**
  * print_alias - Prints an alias string.
- * @node: The alias node.
+ * @node: Pointer to the alias node.
  *
  * Return: Always 0 on success, 1 on error.
  */
+
 int print_alias(list_t *node)
 {
 	char *p = NULL, *a = NULL;
@@ -71,7 +76,7 @@ int print_alias(list_t *node)
 	{
 		p = _strchr(node->str, '=');
 		for (a = node->str; a <= p; a++)
-			_putchar(*a);
+		_putchar(*a);
 		_putchar('\'');
 		_puts(p + 1);
 		_puts("'\n");
@@ -82,7 +87,7 @@ int print_alias(list_t *node)
 
 /**
  * _myalias - Mimics the alias builtin (man alias).
- * @info: Structure containing potential arguments.
+ * @info: Pointer to structure containing potential arguments.
  *
  * Return: Always 0.
  */
@@ -113,3 +118,4 @@ int _myalias(info_t *info)
 
 	return (0);
 }
+

@@ -67,7 +67,6 @@ int write_history(info_t *info)
  * Return: histcount on success, 0 otherwise.
  */
 int read_history(info_t *info)
-int read_history(info_t *info)
 {
 	int i, last = 0, linecount = 0;
 	ssize_t fd, rdlen, fsize = 0;
@@ -94,14 +93,12 @@ int read_history(info_t *info)
 		return (free(buf), 0);
 	close(fd);
 	for (i = 0; i < fsize; i++)
-	{
 		if (buf[i] == '\n')
 		{
 			buf[i] = 0;
 			build_history_list(info, buf + last, linecount++);
 			last = i + 1;
 		}
-	}
 	if (last != i)
 		build_history_list(info, buf + last, linecount++);
 	free(buf);
@@ -121,9 +118,6 @@ int read_history(info_t *info)
  * Return: Always 0
  */
 int build_history_list(info_t *info, char *buf, int linecount)
-{
-	/* Implementation of the function */
-}
 
 {
 	list_t *node = NULL;

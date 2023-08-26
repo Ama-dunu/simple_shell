@@ -152,14 +152,14 @@ int renumber_history(info_t *info)
 	list_t *node = info->history;
 	int i = 0;
 
-	// Traverse the history linked list and update the 'num' field
+	/* Traverse the history linked list and update the 'num' field*/
 	while (node)
 	{
 		node->num = i++;
 		node = node->next;
 	}
 
-	// Update the histcount to the new value
+	/* Update the histcount to the new value*/
 	return (info->histcount = i);
 }
 
